@@ -164,6 +164,13 @@
 
     main { padding-bottom: 3.5rem; }
 
+    .hero,
+    .now,
+    .proofs,
+    .contact {
+      text-align: center;
+    }
+
     .hero {
       padding: 3.25rem 0 2.25rem;
       animation: rise 0.7s var(--ease) both;
@@ -180,14 +187,15 @@
     }
 
     .hero .lede {
-      margin: 0;
+      margin: 0 auto;
       max-width: 36rem;
       font-size: 1.125rem;
       color: var(--ink-soft);
     }
 
     .now {
-      margin: 0 0 2.75rem;
+      /* keep wrap's horizontal auto margins — shorthand margin resets them */
+      margin-bottom: 2.75rem;
       padding: 1rem 0 0;
       border-top: 1px solid var(--line);
       animation: rise 0.7s var(--ease) 0.12s both;
@@ -242,6 +250,7 @@
     .proofs .links {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 0.35rem 1rem;
       font-size: 0.95rem;
       font-weight: 600;
@@ -275,6 +284,7 @@
     .site-footer .meta {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 0.5rem 1.1rem;
       padding-top: 1.25rem;
       border-top: 1px solid var(--line);
