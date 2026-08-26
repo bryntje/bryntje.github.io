@@ -1,2 +1,3 @@
 # bryntje.github.io
-Personal hub (Bryan D'haen) — GitHub Pages
+
+Personal hub for [Bryan D'haen](https://bryntje.github.io) — static GitHub Pages one-pager.

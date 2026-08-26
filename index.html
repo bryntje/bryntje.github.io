@@ -1,17 +1,329 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bryan D'haen</title>
+  <title>Bryan D'haen — Customer Success / technical support</title>
+  <meta name="description" content="Bryan D'haen — product-minded Customer Success / technical support. Bouwt met AI-tools; zoekt bureauwerk in SaaS (Antwerpen / Gent / Mechelen / Sint-Niklaas)." />
+  <meta name="author" content="Bryan D'haen" />
+  <meta property="og:title" content="Bryan D'haen — Customer Success / technical support" />
+  <meta property="og:description" content="Product-minded Customer Success / technical support. SaaS bureauwerk in Antwerpen, Gent, Mechelen of Sint-Niklaas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bryntje.github.io/" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="canonical" href="https://bryntje.github.io/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,550;9..144,650&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a3a36'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='16' fill='%23e8f0ee'%3EB%3C/text%3E%3C/svg%3E" />
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1.25rem; line-height: 1.5; color: #111; }
-    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-    p { color: #444; }
+    :root {
+      --ink: #14201e;
+      --ink-soft: #3d4f4b;
+      --muted: #5c6e6a;
+      --paper: #f3f6f4;
+      --paper-2: #e7eeea;
+      --line: #c5d2cd;
+      --accent: #1a5c52;
+      --accent-hover: #0f3f38;
+      --surface: rgba(255, 255, 255, 0.72);
+      --max: 40rem;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      background:
+        radial-gradient(ellipse 90% 55% at 12% -10%, #cfe3dc 0%, transparent 55%),
+        radial-gradient(ellipse 70% 45% at 100% 8%, #d9e4df 0%, transparent 50%),
+        linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--accent);
+      text-underline-offset: 0.18em;
+      transition: color 0.2s var(--ease);
+    }
+
+    a:hover { color: var(--accent-hover); }
+
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .wrap {
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      padding: 1.1rem 0 0;
+    }
+
+    .site-header nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.15rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .site-header a {
+      color: var(--ink-soft);
+      text-decoration: none;
+    }
+
+    .site-header a:hover { color: var(--accent); }
+
+    main { padding-bottom: 3.5rem; }
+
+    .hero {
+      padding: 3.25rem 0 2.25rem;
+      animation: rise 0.7s var(--ease) both;
+    }
+
+    .hero h1 {
+      margin: 0 0 0.85rem;
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(2.35rem, 7vw, 3.15rem);
+      font-weight: 650;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .hero .lede {
+      margin: 0;
+      max-width: 36rem;
+      font-size: 1.125rem;
+      color: var(--ink-soft);
+    }
+
+    .now {
+      margin: 0 0 2.75rem;
+      padding: 1rem 0 0;
+      border-top: 1px solid var(--line);
+      animation: rise 0.7s var(--ease) 0.12s both;
+    }
+
+    .now h2,
+    .proofs h2,
+    .contact h2 {
+      margin: 0 0 0.55rem;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 550;
+      letter-spacing: -0.01em;
+    }
+
+    .now p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .proofs {
+      animation: rise 0.7s var(--ease) 0.22s both;
+    }
+
+    .proofs ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1.35rem;
+    }
+
+    .proofs li {
+      padding-top: 1.15rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .proofs .label {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .proofs .desc {
+      margin: 0 0 0.45rem;
+      color: var(--ink-soft);
+      font-size: 0.98rem;
+    }
+
+    .proofs .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .contact {
+      margin-top: 2.75rem;
+      padding-top: 1.15rem;
+      border-top: 1px solid var(--line);
+      animation: rise 0.7s var(--ease) 0.32s both;
+    }
+
+    .contact p {
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .contact a.mail {
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+    }
+
+    .contact a.mail:hover { text-decoration: underline; }
+
+    .site-footer {
+      padding: 0 0 2.5rem;
+      animation: rise 0.7s var(--ease) 0.4s both;
+    }
+
+    .site-footer .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .site-footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .site-footer a:hover { color: var(--accent); }
+
+    .status {
+      font-weight: 400;
+      opacity: 0.85;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(0.6rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero,
+      .now,
+      .proofs,
+      .contact,
+      .site-footer {
+        animation: none;
+      }
+    }
+
+    @media (min-width: 640px) {
+      .wrap { width: min(100% - 3rem, var(--max)); }
+      .hero { padding-top: 4rem; }
+    }
   </style>
 </head>
 <body>
-  <h1>Bryan D'haen</h1>
-  <p>Personal hub — content lands Friday 14 Aug (scoped deploy).</p>
+  <header class="site-header">
+    <div class="wrap">
+      <nav aria-label="Hoofdlinks">
+        <a href="https://linkedin.com/in/bryntje" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/bryntje" rel="noopener noreferrer">GitHub</a>
+        <a href="https://docs.innersync.tech" rel="noopener noreferrer">Docs</a>
+        <a href="mailto:bryan.dhaen@icloud.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap" aria-labelledby="name">
+      <h1 id="name">Bryan D'haen</h1>
+      <p class="lede">
+        Product-minded Customer Success / technical support.
+        Bouwt met AI-tools (Cursor, Grok); zoekt bureauwerk in SaaS
+        (Antwerpen / Gent / Mechelen / Sint-Niklaas).
+      </p>
+    </section>
+
+    <section class="now wrap" aria-labelledby="nu">
+      <h2 id="nu">Nu</h2>
+      <p>
+        Beschikbaar na korte revalidatie, streefdatum oktober 2026.
+        Geen rijbewijs → hybrid + OV. Geen diploma; wel certificaat klantendienst
+        + hands-on support (Luminus, bpost, KBC) en eigen productwerk.
+      </p>
+    </section>
+
+    <section class="proofs wrap" aria-labelledby="bewijs">
+      <h2 id="bewijs">Bewijs</h2>
+      <ol>
+        <li>
+          <span class="label">repoly (FOSS)</span>
+          <p class="desc">Polyrepo CLI + agent context packs.</p>
+          <div class="links">
+            <a href="https://github.com/bryntje/repoly" rel="noopener noreferrer">github.com/bryntje/repoly</a>
+          </div>
+        </li>
+        <li>
+          <span class="label">Innersync (bijberoep)</span>
+          <p class="desc">Product leeft — docs en app.</p>
+          <div class="links">
+            <a href="https://docs.innersync.tech" rel="noopener noreferrer">docs.innersync.tech</a>
+            <a href="https://app.innersync.tech" rel="noopener noreferrer">product leeft → app</a>
+          </div>
+        </li>
+        <li>
+          <span class="label">Support bridge</span>
+          <p class="desc">
+            Luminus / bpost / KBC: facturatie, tickets, digitale helpdesk.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="contact wrap" aria-labelledby="contact">
+      <h2 id="contact">Contact</h2>
+      <p>
+        <a class="mail" href="mailto:bryan.dhaen@icloud.com">bryan.dhaen@icloud.com</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="meta">
+        <a href="https://linkedin.com/in/bryntje" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/bryntje" rel="noopener noreferrer">GitHub</a>
+        <a href="https://docs.innersync.tech" rel="noopener noreferrer">Docs</a>
+        <a class="status" href="https://mind.innersync.tech/status" rel="noopener noreferrer">Status</a>
+        <a href="mailto:bryan.dhaen@icloud.com">bryan.dhaen@icloud.com</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
