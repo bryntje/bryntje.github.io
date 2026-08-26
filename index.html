@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,24 +11,69 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://bryntje.github.io/" />
   <meta name="twitter:card" content="summary" />
+  <meta name="color-scheme" content="dark light" />
   <link rel="canonical" href="https://bryntje.github.io/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,550;9..144,650&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a3a36'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='16' fill='%23e8f0ee'%3EB%3C/text%3E%3C/svg%3E" />
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var theme =
+          stored === "light" || stored === "dark"
+            ? stored
+            : window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
   <style>
-    :root {
+    /* Soft dark (default) — forest / charcoal-green, not black */
+    :root,
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #e8eee9;
+      --ink-soft: #b7c4be;
+      --muted: #8a9a93;
+      --paper: #1a2422;
+      --paper-2: #151c1a;
+      --glow-a: #243530;
+      --glow-b: #1e2c28;
+      --line: #2f3f3a;
+      --accent: #7eb8a8;
+      --accent-hover: #a6d4c6;
+      --toggle-bg: #24302c;
+      --toggle-border: #3a4c46;
+      --max: 40rem;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html[data-theme="light"] {
+      color-scheme: light;
       --ink: #14201e;
       --ink-soft: #3d4f4b;
       --muted: #5c6e6a;
       --paper: #f3f6f4;
       --paper-2: #e7eeea;
+      --glow-a: #cfe3dc;
+      --glow-b: #d9e4df;
       --line: #c5d2cd;
       --accent: #1a5c52;
       --accent-hover: #0f3f38;
-      --surface: rgba(255, 255, 255, 0.72);
-      --max: 40rem;
-      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --toggle-bg: #ffffff;
+      --toggle-border: #c5d2cd;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme="light"]) {
+        color-scheme: dark;
+      }
     }
 
     * { box-sizing: border-box; }
@@ -42,11 +87,12 @@
       font-size: 1.0625rem;
       line-height: 1.55;
       background:
-        radial-gradient(ellipse 90% 55% at 12% -10%, #cfe3dc 0%, transparent 55%),
-        radial-gradient(ellipse 70% 45% at 100% 8%, #d9e4df 0%, transparent 50%),
+        radial-gradient(ellipse 90% 55% at 12% -10%, var(--glow-a) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 45% at 100% 8%, var(--glow-b) 0%, transparent 50%),
         linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
       background-attachment: fixed;
       min-height: 100vh;
+      transition: background 0.25s var(--ease), color 0.25s var(--ease);
     }
 
     a {
@@ -57,7 +103,8 @@
 
     a:hover { color: var(--accent-hover); }
 
-    a:focus-visible {
+    a:focus-visible,
+    button:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 2px;
@@ -72,6 +119,14 @@
       padding: 1.1rem 0 0;
     }
 
+    .site-header .bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem 1rem;
+    }
+
     .site-header nav {
       display: flex;
       flex-wrap: wrap;
@@ -80,12 +135,32 @@
       font-weight: 600;
     }
 
-    .site-header a {
+    .site-header nav a {
       color: var(--ink-soft);
       text-decoration: none;
     }
 
-    .site-header a:hover { color: var(--accent); }
+    .site-header nav a:hover { color: var(--accent); }
+
+    .theme-toggle {
+      appearance: none;
+      margin: 0;
+      padding: 0.35rem 0.7rem;
+      border: 1px solid var(--toggle-border);
+      border-radius: 0.35rem;
+      background: var(--toggle-bg);
+      color: var(--ink-soft);
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
 
     main { padding-bottom: 3.5rem; }
 
@@ -233,6 +308,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+      body { transition: none; }
       .hero,
       .now,
       .proofs,
@@ -250,13 +326,16 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap">
+    <div class="wrap bar">
       <nav aria-label="Hoofdlinks">
         <a href="https://linkedin.com/in/bryntje" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://github.com/bryntje" rel="noopener noreferrer">GitHub</a>
         <a href="https://docs.innersync.tech" rel="noopener noreferrer">Docs</a>
-        <a href="mailto:bryan.dhaen@icloud.com">Contact</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-live="polite">
+        Lichte modus
+      </button>
     </div>
   </header>
 
@@ -274,8 +353,7 @@
       <h2 id="nu">Nu</h2>
       <p>
         Beschikbaar na korte revalidatie, streefdatum oktober 2026.
-        Geen rijbewijs → hybrid + OV. Geen diploma; wel certificaat klantendienst
-        + hands-on support (Luminus, bpost, KBC) en eigen productwerk.
+        Geen rijbewijs → hybrid + OV. Geen diploma; wel certificaat klantendienst.
       </p>
     </section>
 
@@ -321,9 +399,43 @@
         <a href="https://github.com/bryntje" rel="noopener noreferrer">GitHub</a>
         <a href="https://docs.innersync.tech" rel="noopener noreferrer">Docs</a>
         <a class="status" href="https://mind.innersync.tech/status" rel="noopener noreferrer">Status</a>
-        <a href="mailto:bryan.dhaen@icloud.com">bryan.dhaen@icloud.com</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById("theme-toggle");
+
+      function currentTheme() {
+        return root.getAttribute("data-theme") === "light" ? "light" : "dark";
+      }
+
+      function syncToggle() {
+        var dark = currentTheme() === "dark";
+        btn.textContent = dark ? "Lichte modus" : "Donkere modus";
+        btn.setAttribute("aria-label", dark ? "Schakel naar lichte modus" : "Schakel naar donkere modus");
+      }
+
+      function setTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        try { localStorage.setItem("theme", theme); } catch (e) {}
+        syncToggle();
+      }
+
+      syncToggle();
+      btn.addEventListener("click", function () {
+        setTheme(currentTheme() === "dark" ? "light" : "dark");
+      });
+
+      try {
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+          if (localStorage.getItem("theme")) return;
+          setTheme(e.matches ? "dark" : "light");
+        });
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>
