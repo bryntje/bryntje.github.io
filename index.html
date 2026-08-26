@@ -194,7 +194,8 @@
     }
 
     .now {
-      margin: 0 0 2.75rem;
+      /* keep wrap's horizontal auto margins — shorthand margin resets them */
+      margin-bottom: 2.75rem;
       padding: 1rem 0 0;
       border-top: 1px solid var(--line);
       animation: rise 0.7s var(--ease) 0.12s both;
